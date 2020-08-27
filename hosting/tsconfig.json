@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "esNext",
+		"moduleResolution": "node",
+		"jsx": "react",
+		"strict": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"baseUrl": "./",
+		"paths": {
+			"@client/*": ["./src/*"],
+		},
+	},
+	"include": [
+		"./src",
+	],
+}
