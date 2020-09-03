@@ -48,7 +48,7 @@ export async function middlewareHoge(api: TypeArgument3, next: TypeArgument2, ac
 
 	for (let i: number = 0; i < response1.value.groups.length; i++) {
 		const groupId: string = response1.value.groups[i].id;
-		notices[groupId] = { time: response1.time, value: [], };
+		notices[groupId] = { time: response1.time, value: response1.value.groups[i], list: [], };
 
 		const count: number = response1.value.groups[i].noticeCount;
 		const limit: number = 100;
@@ -64,7 +64,7 @@ export async function middlewareHoge(api: TypeArgument3, next: TypeArgument2, ac
 				const createdAt: number = new Date(response2.value.notices[j].createdAt).getTime();
 				if (now - createdAt < 1000 * 60 * 10) {
 					const groupId: string = response2.value.notices[j].groupId;
-					notices[groupId].value.push({ time: response2.time, value: response2.value.notices[j], });
+					notices[groupId].list.push({ time: response2.time, value: response2.value.notices[j], });
 				} else {
 					isBreak = true;
 				}

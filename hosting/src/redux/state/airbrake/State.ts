@@ -3,6 +3,7 @@
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
+import { Group, } from "@client/api/groups";
 import { Notice, } from "@client/api/notices";
 
 // ----------------------------------------------------------------
@@ -12,7 +13,8 @@ import { Notice, } from "@client/api/notices";
 export type StateHogeResponse = {
 	[key: string]: {
 		time: string;
-		value: {
+		value: Group;
+		list: {
 			time: string;
 			value: Notice;
 		}[];

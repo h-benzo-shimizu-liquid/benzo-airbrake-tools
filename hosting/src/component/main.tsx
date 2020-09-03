@@ -21,12 +21,12 @@ import ComponentPageHoge from "@client/component/pageHoge";
 
 const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 	return (
-		<ReactRedux.Provider store = { store }>
+		<ReactRedux.Provider store = {store}>
 			<BrowserRouter>
 				<Switch>
-					<Route path="/hoge" component={ ComponentPageHoge } />
-					<Route path="/template" component={ ComponentTemplate } />
-					<Route component={ ComponentPageTop } />
+					<Route path="/hoge" component={ComponentPageHoge} />
+					<Route path="/template" component={ComponentTemplate} />
+					<Route component={ComponentPageTop} />
 				</Switch>
 			</BrowserRouter>
 		</ReactRedux.Provider>

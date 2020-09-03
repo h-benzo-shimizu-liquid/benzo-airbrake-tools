@@ -51,13 +51,13 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 				<tbody>
 					<tr>
 						<td><div>project id</div></td>
-						<td><input type="text" value={localProjectId} onChange={ (event: React.ChangeEvent<HTMLInputElement>): void => { setLocalProjectId(event.target.value); } }></input></td>
-						<td><button onClick={ (): void => { dispatch(stateAirbrakeCreateActionProjectId(localProjectId));  } }>設定</button></td>
+						<td><input type="text" value={localProjectId} onChange={(event: React.ChangeEvent<HTMLInputElement>): void => { setLocalProjectId(event.target.value); }}></input></td>
+						<td><button onClick={(): void => { dispatch(stateAirbrakeCreateActionProjectId(localProjectId));  }}>設定</button></td>
 					</tr>
 					<tr>
 						<td><div>user key</div></td>
-						<td><input type="text" value={localUserKey} onChange={ (event: React.ChangeEvent<HTMLInputElement>): void => { setLocalUserKey(event.target.value); } }></input></td>
-						<td><button onClick={ (): void => { dispatch(stateAirbrakeCreateActionUserKey(localUserKey));  } }>設定</button></td>
+						<td><input type="text" value={localUserKey} onChange={(event: React.ChangeEvent<HTMLInputElement>): void => { setLocalUserKey(event.target.value); }}></input></td>
+						<td><button onClick={(): void => { dispatch(stateAirbrakeCreateActionUserKey(localUserKey));  }}>設定</button></td>
 					</tr>
 				</tbody>
 			</table>
