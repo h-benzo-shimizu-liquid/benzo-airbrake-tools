@@ -43,7 +43,7 @@ export async function middlewareGetCsv(api: TypeArgument3, next: TypeArgument2, 
 
 	const projectId: string = api.getState().stateAirbrake.projectId;
 	const userKey: string = api.getState().stateAirbrake.userKey;
-	const response1: ResponseGroups = await apiGroups({ projectId, userKey, page: "1", limit: "3", });
+	const response1: ResponseGroups = await apiGroups({ projectId, userKey, page: "1", limit: "100", });
 	console.log("groups", response1);
 
 	for (let i: number = 0; i < response1.value.groups.length; i++) {
@@ -52,7 +52,7 @@ export async function middlewareGetCsv(api: TypeArgument3, next: TypeArgument2, 
 		notices[groupId] = { time: response1.time, value: response1.value.groups[i], list: [], };
 
 		const count: number = response1.value.groups[i].noticeCount;
-		const limit: number = 100;
+		const limit: number = 1000;
 		let page: number = 1;
 		while ((page - 1) * limit < count) {
 			let isBreak: boolean = false;
@@ -60,10 +60,12 @@ export async function middlewareGetCsv(api: TypeArgument3, next: TypeArgument2, 
 			const response2: ResponseNotices = await apiNotices({ projectId, userKey, groupId, page: `${page}`, limit: `${limit}`, });
 			console.log("notices", response2);
 
+			// 1週間分のデータを取得
+			const week: number = 1000 * 60 * 60 * 24 * 7;
 			const now: number = new Date(response2.time).getTime();
 			for (let j: number = 0; j < response2.value.notices.length; j++) {
 				const createdAt: number = new Date(response2.value.notices[j].createdAt).getTime();
-				if (now - createdAt < 1000 * 60 * 10) {
+				if (now - createdAt < week) {
 					const groupId: string = response2.value.notices[j].groupId;
 					notices[groupId].list.push({ time: response2.time, value: response2.value.notices[j], });
 				} else {
