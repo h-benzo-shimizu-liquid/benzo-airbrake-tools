@@ -10,6 +10,12 @@ import { Notice, } from "@client/api/notices";
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
+export type StateGetCsvLoading = {
+	isLoading: boolean;
+	current: number;
+	total: number;
+}
+
 export type StateGetCsvResponse = {
 	[key: string]: {
 		time: string;
@@ -24,7 +30,7 @@ export type StateGetCsvResponse = {
 export interface State {
 	projectId: string;
 	userKey: string;
-	getCsvLoading: boolean;
+	getCsvLoading: StateGetCsvLoading;
 	getCsvResponse: StateGetCsvResponse | null;
 }
 

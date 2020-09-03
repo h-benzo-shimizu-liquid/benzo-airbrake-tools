@@ -19,7 +19,7 @@ import { reducerGetCsvResponse, } from "@client/redux/state/airbrake/actionGetCs
 const initialState: State = {
 	projectId: defaultProjectId,
 	userKey: defaultUserKey,
-	getCsvLoading: false,
+	getCsvLoading: { isLoading: false, total: 0, current: 0, },
 	getCsvResponse: null,
 };
 

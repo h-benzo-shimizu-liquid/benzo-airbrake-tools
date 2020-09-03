@@ -36,9 +36,9 @@ type TypeArgument2 = Redux.Dispatch<TypeArgument1>;
 type TypeArgument3 = Redux.MiddlewareAPI<Redux.Dispatch, ReduxStoreState>;
 export async function middlewareGetCsv(api: TypeArgument3, next: TypeArgument2, action: TypeArgument1): Promise<boolean> {
 	if (action.type !== ActionTypes.middlewareAirbrakeGetCsv) { return false; }
-	if (api.getState().stateAirbrake.getCsvLoading) { return false; }
+	if (api.getState().stateAirbrake.getCsvLoading.isLoading) { return false; }
 	if (api.getState().stateAirbrake.getCsvResponse !== null) { return false; }
-	next(stateAirbrakeCreateActionGetCsvLoading(true));
+	next(stateAirbrakeCreateActionGetCsvLoading(true, 0, 0));
 	const notices: StateGetCsvResponse = {};
 
 	const projectId: string = api.getState().stateAirbrake.projectId;
@@ -47,6 +47,7 @@ export async function middlewareGetCsv(api: TypeArgument3, next: TypeArgument2, 
 	console.log("groups", response1);
 
 	for (let i: number = 0; i < response1.value.groups.length; i++) {
+		next(stateAirbrakeCreateActionGetCsvLoading(true, i + 1, response1.value.groups.length));
 		const groupId: string = response1.value.groups[i].id;
 		notices[groupId] = { time: response1.time, value: response1.value.groups[i], list: [], };
 
@@ -76,7 +77,7 @@ export async function middlewareGetCsv(api: TypeArgument3, next: TypeArgument2, 
 	}
 
 	next(stateAirbrakeCreateActionGetCsvResponse(notices));
-	next(stateAirbrakeCreateActionGetCsvLoading(false));
+	next(stateAirbrakeCreateActionGetCsvLoading(false, 0, 0));
 	return true;
 };
 

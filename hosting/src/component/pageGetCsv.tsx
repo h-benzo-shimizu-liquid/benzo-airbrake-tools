@@ -9,7 +9,7 @@ import * as ReactRedux from "react-redux";
 import * as Redux from "redux";
 import { Notice, } from "@client/api/notices";
 import { ReduxStoreState, } from "@client/redux/store";
-import { StateGetCsvResponse, } from "@client/redux/state/airbrake/State";
+import { StateGetCsvLoading, StateGetCsvResponse, } from "@client/redux/state/airbrake/State";
 import { middlewareAirbrakeCreateActionGetCsv, } from "@client/redux/middleware/airbrake/actionGetCsv";
 
 // ----------------------------------------------------------------
@@ -20,7 +20,8 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 	const dispatch: Redux.Dispatch = ReactRedux.useDispatch();
 
 	// ステート設定 ストア値
-	const storeValue: StateGetCsvResponse | null = ReactRedux.useSelector((state: ReduxStoreState): StateGetCsvResponse | null => state.stateAirbrake.getCsvResponse);
+	const storeLoading: StateGetCsvLoading = ReactRedux.useSelector((state: ReduxStoreState): StateGetCsvLoading => state.stateAirbrake.getCsvLoading);
+	const storeResponse: StateGetCsvResponse | null = ReactRedux.useSelector((state: ReduxStoreState): StateGetCsvResponse | null => state.stateAirbrake.getCsvResponse);
 
 	// ステート設定 ローカル値
 	const [localFlagsShow, setLocalFlagsShow,]: [{ [key: string]: boolean; }, (value: { [key: string]: boolean; }) => void,] = React.useState<{ [key: string]: boolean; }>({});
@@ -41,9 +42,9 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 		}}>
 			<div>csv取得</div>
 			<hr></hr>
-			{!storeValue ? (
-				<div>loading</div>
-			) : Object.keys(storeValue).map((key: string): JSX.Element => (
+			{!storeResponse ? (
+				<div>loading {storeLoading.current} / {storeLoading.total}</div>
+			) : Object.keys(storeResponse).map((key: string): JSX.Element => (
 				<div key={key}>
 					<div style={{
 						display: "flex",
@@ -61,7 +62,7 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 								"info",
 								"userToken",
 								"userAgent",
-							].join(",")].concat(storeValue[key].list.map((notice: {
+							].join(",")].concat(storeResponse[key].list.map((notice: {
 								time: string;
 								value: Notice;
 							}): string => [
@@ -77,9 +78,9 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 							anchor.href = window.URL.createObjectURL(blob);
 							anchor.click();
 						}}>download csv</button>
-						<div style={{ marginLeft: "20px", }}>{storeValue[key].value.id}</div>
-						<div style={{ marginLeft: "20px", }}>{storeValue[key].list.length}</div>
-						<div style={{ marginLeft: "20px", }}>{storeValue[key].value.errors[0].message}</div>
+						<div style={{ marginLeft: "20px", }}>{storeResponse[key].value.id}</div>
+						<div style={{ marginLeft: "20px", }}>{storeResponse[key].list.length}</div>
+						<div style={{ marginLeft: "20px", }}>{storeResponse[key].value.errors[0].message}</div>
 					</div>
 					{localFlagsShow[key] && (<table style={{ minWidth: "2000px", }}><thead><tr>
 						<td style={{ width: "240px", }}>id</td>
@@ -87,7 +88,7 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 						<td style={{ width: "600px", }}>info</td>
 						<td style={{ width: "240px", }}>userToken</td>
 						<td style={{ width: "1080px", }}>userAgent</td>
-					</tr></thead><tbody>{storeValue[key].list.slice(0, 30).map((notice: {
+					</tr></thead><tbody>{storeResponse[key].list.slice(0, 30).map((notice: {
 						time: string;
 						value: Notice;
 					}): JSX.Element => (
