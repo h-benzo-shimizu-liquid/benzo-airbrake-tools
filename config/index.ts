@@ -3,16 +3,17 @@
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-// 命令種
-export enum ActionTypes {
-	stateTemplateTest,
-	stateAirbrakeProjectId,
-	stateAirbrakeUserKey,
-	stateAirbrakeHogeLoading,
-	stateAirbrakeHogeResponse,
-	middlewareTemplateTest,
-	middlewareAirbrakeHoge,
-}
+export default ((): {
+	baseUrl: string;
+} => {
+	return process.env.NODE_ENV === "development" ? {
+		baseUrl: "http://localhost:5001/benzo-airbrake-tools/us-central1/api",
+	} : process.env.NODE_ENV === "production" ? {
+		baseUrl: "https://us-central1-benzo-airbrake-tools.cloudfunctions.net/api",
+	} : {
+		baseUrl: "",
+	};
+})();
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

@@ -5,43 +5,43 @@
 
 import * as Redux from "redux";
 import { ActionTypes, } from "@client/redux/ActionTypes";
-import { ReduxStoreState, } from "@client/redux/store";
+import { State, StateHogeResponse, } from "@client/redux/state/airbrake/State";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
 // 命令構造体
-interface ActionTest extends Redux.Action<ActionTypes> {
-	value: number;
+interface ActionHogeResponse extends Redux.Action<ActionTypes> {
+	value: StateHogeResponse | null;
 }
 
 // ----------------------------------------------------------------
 
 // 命令作成
-function createActionTest(value: number): ActionTest {
+function createActionHogeResponse(value: StateHogeResponse | null): ActionHogeResponse {
 	return {
-		type: ActionTypes.middlewareTemplateTest,
-		value: value,
+		type: ActionTypes.stateAirbrakeHogeResponse,
+		value,
 	};
 }
 
 // ----------------------------------------------------------------
 
 // 命令処理
-type TypeArgument1 = Redux.Action<ActionTypes>;
-type TypeArgument2 = Redux.Dispatch<TypeArgument1>;
-type TypeArgument3 = Redux.MiddlewareAPI<Redux.Dispatch, ReduxStoreState>;
-export async function middlewareTest(api: TypeArgument3, next: TypeArgument2, action: TypeArgument1): Promise<boolean> {
-	if (action.type !== ActionTypes.middlewareTemplateTest) { return false; }
-	return true;
+export function reducerHogeResponse(state: State, action: Redux.Action<ActionTypes>): State {
+	if (action.type !== ActionTypes.stateAirbrakeHogeResponse) { return state; }
+	const myAction: ActionHogeResponse = action as ActionHogeResponse;
+	const newState: State = Object.assign({}, state);
+	newState.hogeResponse = myAction.value;
+	return newState;
 };
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export const middlewareTemplateCreateActionTest = createActionTest;
+export const stateAirbrakeCreateActionHogeResponse = createActionHogeResponse;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

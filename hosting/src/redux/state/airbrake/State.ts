@@ -3,23 +3,28 @@
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import * as cors from "cors";
-import apiGroups from "@server/api/groups";
-import apiNotices from "@server/api/notices";
+import { Notice, } from "@client/api/notices";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-const app: express.Express = express();
-app.use(bodyParser.json());
-app.use(cors());
-app.post("/groups", apiGroups);
-app.post("/notices", apiNotices);
+export type StateHogeResponse = {
+	[key: string]: {
+		time: string;
+		value: {
+			time: string;
+			value: Notice;
+		}[];
+	};
+};
 
-export default app;
+export interface State {
+	projectId: string;
+	userKey: string;
+	hogeLoading: boolean;
+	hogeResponse: StateHogeResponse | null;
+}
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

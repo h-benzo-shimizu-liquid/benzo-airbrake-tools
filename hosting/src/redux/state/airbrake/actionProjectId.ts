@@ -5,43 +5,52 @@
 
 import * as Redux from "redux";
 import { ActionTypes, } from "@client/redux/ActionTypes";
-import { ReduxStoreState, } from "@client/redux/store";
+import { State, } from "@client/redux/state/airbrake/State";
+
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+
+const key: string = "benzo_airbrake_tools_projectId";
+
+export const defaultProjectId: string = window.localStorage.getItem(key) || "";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
 // 命令構造体
-interface ActionTest extends Redux.Action<ActionTypes> {
-	value: number;
+interface ActionProjectId extends Redux.Action<ActionTypes> {
+	value: string;
 }
 
 // ----------------------------------------------------------------
 
 // 命令作成
-function createActionTest(value: number): ActionTest {
+function createActionProjectId(value: string): ActionProjectId {
 	return {
-		type: ActionTypes.middlewareTemplateTest,
-		value: value,
+		type: ActionTypes.stateAirbrakeProjectId,
+		value,
 	};
 }
 
 // ----------------------------------------------------------------
 
 // 命令処理
-type TypeArgument1 = Redux.Action<ActionTypes>;
-type TypeArgument2 = Redux.Dispatch<TypeArgument1>;
-type TypeArgument3 = Redux.MiddlewareAPI<Redux.Dispatch, ReduxStoreState>;
-export async function middlewareTest(api: TypeArgument3, next: TypeArgument2, action: TypeArgument1): Promise<boolean> {
-	if (action.type !== ActionTypes.middlewareTemplateTest) { return false; }
-	return true;
+export function reducerProjectId(state: State, action: Redux.Action<ActionTypes>): State {
+	if (action.type !== ActionTypes.stateAirbrakeProjectId) { return state; }
+	const myAction: ActionProjectId = action as ActionProjectId;
+	const newState: State = Object.assign({}, state);
+	newState.projectId = myAction.value;
+	window.localStorage.setItem(key, myAction.value);
+	return newState;
 };
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export const middlewareTemplateCreateActionTest = createActionTest;
+export const stateAirbrakeCreateActionProjectId = createActionProjectId;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

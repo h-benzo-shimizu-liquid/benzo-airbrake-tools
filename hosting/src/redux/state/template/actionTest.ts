@@ -19,7 +19,7 @@ interface ActionTest extends Redux.Action<ActionTypes> {
 // ----------------------------------------------------------------
 
 // 命令作成
-export function createActionTest(value: number): ActionTest {
+function createActionTest(value: number): ActionTest {
 	return {
 		type: ActionTypes.stateTemplateTest,
 		value: value,
@@ -36,6 +36,12 @@ export function reducerTest(state: State, action: Redux.Action<ActionTypes>): St
 	newState.value = newState.value + myAction.value;
 	return newState;
 };
+
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+
+export const stateTemplateCreateActionTest = createActionTest;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

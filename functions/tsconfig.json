@@ -10,6 +10,8 @@
 		"baseUrl": "./",
 		"paths": {
 			"@server/*": ["./src/*"],
+			"@client/*": ["../hosting/src/*"],
+			"@config/*": ["../config/*"],
 		},
 	},
 	"include": [

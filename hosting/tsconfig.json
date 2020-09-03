@@ -11,6 +11,8 @@
 		"baseUrl": "./",
 		"paths": {
 			"@client/*": ["./src/*"],
+			"@server/*": ["../functions/src/*"],
+			"@config/*": ["../config/*"],
 		},
 	},
 	"include": [
