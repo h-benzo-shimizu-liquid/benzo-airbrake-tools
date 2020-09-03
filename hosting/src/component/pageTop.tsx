@@ -69,7 +69,7 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 				height: "100px",
 			}}>
 				<Link to="/getCsv">getCsv</Link>
-				<Link to="/template">template</Link>
+				{/* <Link to="/template">template</Link> */}
 			</div>
 		</div>
 	);

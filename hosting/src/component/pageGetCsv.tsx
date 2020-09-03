@@ -4,6 +4,7 @@
 // ----------------------------------------------------------------
 
 import * as React from "react";
+import { Link, } from "react-router-dom";
 import * as ReactRedux from "react-redux";
 import * as Redux from "redux";
 import { Notice, } from "@client/api/notices";
@@ -38,6 +39,8 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 			bottom: 0,
 			overflow: "scroll",
 		}}>
+			<div>csv取得</div>
+			<hr></hr>
 			{!storeValue ? (
 				<div>loading</div>
 			) : Object.keys(storeValue).map((key: string): JSX.Element => (
@@ -130,6 +133,8 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 				accumulator.push(currentValue);
 				return accumulator;
 			}, [])}
+			<hr></hr>
+			<Link to="/">top</Link>
 		</div>
 	);
 };
