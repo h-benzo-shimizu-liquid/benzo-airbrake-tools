@@ -6,7 +6,7 @@
 import * as Redux from "redux";
 import { ActionTypes, } from "@client/redux/ActionTypes";
 import { ReduxStoreState, } from "@client/redux/store";
-import { middlewareHoge, } from "@client/redux/middleware/airbrake/actionHoge";
+import { middlewareGetCsv, } from "@client/redux/middleware/airbrake/actionGetCsv";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
@@ -19,7 +19,7 @@ type TypeReturn1 = Promise<void>;
 type TypeReturn2 = (action: TypeArgument1) => TypeReturn1;
 type TypeReturn3 = (next: TypeArgument2) => TypeReturn2;
 export default (api: TypeArgument3): TypeReturn3 => (next: TypeArgument2): TypeReturn2 => async (action: TypeArgument1): TypeReturn1 => {
-	if (await middlewareHoge(api, next, action)) { return; }
+	if (await middlewareGetCsv(api, next, action)) { return; }
 	next(action);
 };
 

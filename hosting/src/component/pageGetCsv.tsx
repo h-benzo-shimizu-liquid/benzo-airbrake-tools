@@ -8,8 +8,8 @@ import * as ReactRedux from "react-redux";
 import * as Redux from "redux";
 import { Notice, } from "@client/api/notices";
 import { ReduxStoreState, } from "@client/redux/store";
-import { StateHogeResponse, } from "@client/redux/state/airbrake/State";
-import { middlewareAirbrakeCreateActionHoge, } from "@client/redux/middleware/airbrake/actionHoge";
+import { StateGetCsvResponse, } from "@client/redux/state/airbrake/State";
+import { middlewareAirbrakeCreateActionGetCsv, } from "@client/redux/middleware/airbrake/actionGetCsv";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
@@ -19,13 +19,13 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 	const dispatch: Redux.Dispatch = ReactRedux.useDispatch();
 
 	// ステート設定 ストア値
-	const storeValue: StateHogeResponse | null = ReactRedux.useSelector((state: ReduxStoreState): StateHogeResponse | null => state.stateAirbrake.hogeResponse);
+	const storeValue: StateGetCsvResponse | null = ReactRedux.useSelector((state: ReduxStoreState): StateGetCsvResponse | null => state.stateAirbrake.getCsvResponse);
 
 	// ステート設定 ローカル値
 	const [localFlagsShow, setLocalFlagsShow,]: [{ [key: string]: boolean; }, (value: { [key: string]: boolean; }) => void,] = React.useState<{ [key: string]: boolean; }>({});
 
 	React.useEffect((): () => void => {
-		dispatch(middlewareAirbrakeCreateActionHoge());
+		dispatch(middlewareAirbrakeCreateActionGetCsv());
 		return (): void => {};
 	}, []);
 

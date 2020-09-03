@@ -8,10 +8,10 @@ export enum ActionTypes {
 	stateTemplateTest,
 	stateAirbrakeProjectId,
 	stateAirbrakeUserKey,
-	stateAirbrakeHogeLoading,
-	stateAirbrakeHogeResponse,
+	stateAirbrakeGetCsvLoading,
+	stateAirbrakeGetCsvResponse,
 	middlewareTemplateTest,
-	middlewareAirbrakeHoge,
+	middlewareAirbrakeGetCsv,
 }
 
 // ----------------------------------------------------------------

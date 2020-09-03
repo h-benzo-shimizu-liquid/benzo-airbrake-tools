@@ -5,23 +5,23 @@
 
 import * as Redux from "redux";
 import { ActionTypes, } from "@client/redux/ActionTypes";
-import { State, StateHogeResponse, } from "@client/redux/state/airbrake/State";
+import { State, StateGetCsvResponse, } from "@client/redux/state/airbrake/State";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
 // 命令構造体
-interface ActionHogeResponse extends Redux.Action<ActionTypes> {
-	value: StateHogeResponse | null;
+interface ActionGetCsvResponse extends Redux.Action<ActionTypes> {
+	value: StateGetCsvResponse | null;
 }
 
 // ----------------------------------------------------------------
 
 // 命令作成
-function createActionHogeResponse(value: StateHogeResponse | null): ActionHogeResponse {
+function createActionGetCsvResponse(value: StateGetCsvResponse | null): ActionGetCsvResponse {
 	return {
-		type: ActionTypes.stateAirbrakeHogeResponse,
+		type: ActionTypes.stateAirbrakeGetCsvResponse,
 		value,
 	};
 }
@@ -29,11 +29,11 @@ function createActionHogeResponse(value: StateHogeResponse | null): ActionHogeRe
 // ----------------------------------------------------------------
 
 // 命令処理
-export function reducerHogeResponse(state: State, action: Redux.Action<ActionTypes>): State {
-	if (action.type !== ActionTypes.stateAirbrakeHogeResponse) { return state; }
-	const myAction: ActionHogeResponse = action as ActionHogeResponse;
+export function reducerGetCsvResponse(state: State, action: Redux.Action<ActionTypes>): State {
+	if (action.type !== ActionTypes.stateAirbrakeGetCsvResponse) { return state; }
+	const myAction: ActionGetCsvResponse = action as ActionGetCsvResponse;
 	const newState: State = Object.assign({}, state);
-	newState.hogeResponse = myAction.value;
+	newState.getCsvResponse = myAction.value;
 	return newState;
 };
 
@@ -41,7 +41,7 @@ export function reducerHogeResponse(state: State, action: Redux.Action<ActionTyp
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export const stateAirbrakeCreateActionHogeResponse = createActionHogeResponse;
+export const stateAirbrakeCreateActionGetCsvResponse = createActionGetCsvResponse;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

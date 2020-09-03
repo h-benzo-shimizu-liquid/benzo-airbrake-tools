@@ -12,16 +12,16 @@ import { State, } from "@client/redux/state/airbrake/State";
 // ----------------------------------------------------------------
 
 // 命令構造体
-interface ActionHogeLoading extends Redux.Action<ActionTypes> {
+interface ActionGetCsvLoading extends Redux.Action<ActionTypes> {
 	value: boolean;
 }
 
 // ----------------------------------------------------------------
 
 // 命令作成
-function createActionHogeLoading(value: boolean): ActionHogeLoading {
+function createActionGetCsvLoading(value: boolean): ActionGetCsvLoading {
 	return {
-		type: ActionTypes.stateAirbrakeHogeLoading,
+		type: ActionTypes.stateAirbrakeGetCsvLoading,
 		value,
 	};
 }
@@ -29,11 +29,11 @@ function createActionHogeLoading(value: boolean): ActionHogeLoading {
 // ----------------------------------------------------------------
 
 // 命令処理
-export function reducerHogeLoading(state: State, action: Redux.Action<ActionTypes>): State {
-	if (action.type !== ActionTypes.stateAirbrakeHogeLoading) { return state; }
-	const myAction: ActionHogeLoading = action as ActionHogeLoading;
+export function reducerGetCsvLoading(state: State, action: Redux.Action<ActionTypes>): State {
+	if (action.type !== ActionTypes.stateAirbrakeGetCsvLoading) { return state; }
+	const myAction: ActionGetCsvLoading = action as ActionGetCsvLoading;
 	const newState: State = Object.assign({}, state);
-	newState.hogeLoading = myAction.value;
+	newState.getCsvLoading = myAction.value;
 	return newState;
 };
 
@@ -41,7 +41,7 @@ export function reducerHogeLoading(state: State, action: Redux.Action<ActionType
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export const stateAirbrakeCreateActionHogeLoading = createActionHogeLoading;
+export const stateAirbrakeCreateActionGetCsvLoading = createActionGetCsvLoading;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

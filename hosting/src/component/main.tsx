@@ -13,7 +13,7 @@ import * as ReactRedux from "react-redux";
 import { store, } from "@client/redux/store";
 import ComponentTemplate from "@client/component/template";
 import ComponentPageTop from "@client/component/pageTop";
-import ComponentPageHoge from "@client/component/pageHoge";
+import ComponentPageGetCsv from "@client/component/pageGetCsv";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
@@ -24,7 +24,7 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 		<ReactRedux.Provider store = {store}>
 			<BrowserRouter>
 				<Switch>
-					<Route path="/hoge" component={ComponentPageHoge} />
+					<Route path="/getCsv" component={ComponentPageGetCsv} />
 					<Route path="/template" component={ComponentTemplate} />
 					<Route component={ComponentPageTop} />
 				</Switch>

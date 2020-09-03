@@ -10,7 +10,7 @@ import { Notice, } from "@client/api/notices";
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export type StateHogeResponse = {
+export type StateGetCsvResponse = {
 	[key: string]: {
 		time: string;
 		value: Group;
@@ -24,8 +24,8 @@ export type StateHogeResponse = {
 export interface State {
 	projectId: string;
 	userKey: string;
-	hogeLoading: boolean;
-	hogeResponse: StateHogeResponse | null;
+	getCsvLoading: boolean;
+	getCsvResponse: StateGetCsvResponse | null;
 }
 
 // ----------------------------------------------------------------
