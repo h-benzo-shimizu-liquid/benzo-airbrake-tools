@@ -24,7 +24,7 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 		<ReactRedux.Provider store = { store }>
 			<BrowserRouter>
 				<Switch>
-					<Route path="/test" component={ ComponentPageHoge } />
+					<Route path="/hoge" component={ ComponentPageHoge } />
 					<Route path="/template" component={ ComponentTemplate } />
 					<Route component={ ComponentPageTop } />
 				</Switch>
