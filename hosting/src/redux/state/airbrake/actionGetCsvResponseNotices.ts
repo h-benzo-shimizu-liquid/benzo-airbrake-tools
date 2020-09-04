@@ -5,42 +5,37 @@
 
 import * as Redux from "redux";
 import { ActionTypes, } from "@client/redux/ActionTypes";
-import { State, } from "@client/redux/state/airbrake/State";
+import { State, StateGetCsvResponseGroup, } from "@client/redux/state/airbrake/State";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
 // 命令構造体
-interface ActionGetCsvLoading extends Redux.Action<ActionTypes> {
-	isLoading: boolean;
-	current: number;
-	total: number;
+interface ActionGetCsvResponseNotices extends Redux.Action<ActionTypes> {
+	key: string;
+	value: StateGetCsvResponseGroup;
 }
 
 // ----------------------------------------------------------------
 
 // 命令作成
-function createActionGetCsvLoading(isLoading: boolean, current: number, total: number): ActionGetCsvLoading {
+function createActionGetCsvResponseNotices(key: string, value: StateGetCsvResponseGroup): ActionGetCsvResponseNotices {
 	return {
-		type: ActionTypes.stateAirbrakeGetCsvLoading,
-		isLoading,
-		current,
-		total,
+		type: ActionTypes.stateAirbrakeGetCsvResponseNotices,
+		key,
+		value,
 	};
 }
 
 // ----------------------------------------------------------------
 
 // 命令処理
-export function reducerGetCsvLoading(state: State, action: Redux.Action<ActionTypes>): State {
-	if (action.type !== ActionTypes.stateAirbrakeGetCsvLoading) { return state; }
-	const myAction: ActionGetCsvLoading = action as ActionGetCsvLoading;
+export function reducerGetCsvResponseNotices(state: State, action: Redux.Action<ActionTypes>): State {
+	if (action.type !== ActionTypes.stateAirbrakeGetCsvResponseNotices) { return state; }
+	const myAction: ActionGetCsvResponseNotices = action as ActionGetCsvResponseNotices;
 	const newState: State = Object.assign({}, state);
-	newState.getCsvLoading = Object.assign({}, newState.getCsvLoading);
-	newState.getCsvLoading.isLoading = myAction.isLoading;
-	newState.getCsvLoading.current = myAction.current;
-	newState.getCsvLoading.total = myAction.total;
+	newState.getCsvResponse = Object.assign({}, newState.getCsvResponse, { [myAction.key]: Object.assign({}, myAction.value), });	
 	return newState;
 };
 
@@ -48,7 +43,7 @@ export function reducerGetCsvLoading(state: State, action: Redux.Action<ActionTy
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export const stateAirbrakeCreateActionGetCsvLoading = createActionGetCsvLoading;
+export const stateAirbrakeCreateActionGetCsvResponseNotices = createActionGetCsvResponseNotices;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

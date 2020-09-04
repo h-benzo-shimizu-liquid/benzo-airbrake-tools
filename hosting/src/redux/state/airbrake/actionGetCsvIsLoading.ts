@@ -5,23 +5,23 @@
 
 import * as Redux from "redux";
 import { ActionTypes, } from "@client/redux/ActionTypes";
-import { State, } from "@client/redux/state/template/State";
+import { State, } from "@client/redux/state/airbrake/State";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
 // 命令構造体
-interface ActionTest extends Redux.Action<ActionTypes> {
-	value: number;
+interface ActionGetCsvIsLoading extends Redux.Action<ActionTypes> {
+	value: boolean;
 }
 
 // ----------------------------------------------------------------
 
 // 命令作成
-function createActionTest(value: number): ActionTest {
+function createActionGetCsvIsLoading(value: boolean): ActionGetCsvIsLoading {
 	return {
-		type: ActionTypes.stateTemplateTest,
+		type: ActionTypes.stateAirbrakeGetCsvIsLoading,
 		value,
 	};
 }
@@ -29,11 +29,11 @@ function createActionTest(value: number): ActionTest {
 // ----------------------------------------------------------------
 
 // 命令処理
-export function reducerTest(state: State, action: Redux.Action<ActionTypes>): State {
-	if (action.type !== ActionTypes.stateTemplateTest) { return state; }
-	const myAction: ActionTest = action as ActionTest;
+export function reducerGetCsvIsLoading(state: State, action: Redux.Action<ActionTypes>): State {
+	if (action.type !== ActionTypes.stateAirbrakeGetCsvIsLoading) { return state; }
+	const myAction: ActionGetCsvIsLoading = action as ActionGetCsvIsLoading;
 	const newState: State = Object.assign({}, state);
-	newState.value = newState.value + myAction.value;
+	newState.getCsvIsLoading = myAction.value;
 	return newState;
 };
 
@@ -41,7 +41,7 @@ export function reducerTest(state: State, action: Redux.Action<ActionTypes>): St
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export const stateTemplateCreateActionTest = createActionTest;
+export const stateAirbrakeCreateActionGetCsvIsLoading = createActionGetCsvIsLoading;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

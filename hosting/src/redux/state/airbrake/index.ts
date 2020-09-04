@@ -8,8 +8,9 @@ import { ActionTypes, } from "@client/redux/ActionTypes";
 import { State, } from "@client/redux/state/airbrake/State";
 import { defaultProjectId, reducerProjectId, } from "@client/redux/state/airbrake/actionProjectId";
 import { defaultUserKey, reducerUserKey, } from "@client/redux/state/airbrake/actionUserKey";
-import { reducerGetCsvLoading, } from "@client/redux/state/airbrake/actionGetCsvLoading";
-import { reducerGetCsvResponse, } from "@client/redux/state/airbrake/actionGetCsvResponse";
+import { reducerGetCsvIsLoading, } from "@client/redux/state/airbrake/actionGetCsvIsLoading";
+import { reducerGetCsvResponseGroups, } from "@client/redux/state/airbrake/actionGetCsvResponseGroups";
+import { reducerGetCsvResponseNotices, } from "@client/redux/state/airbrake/actionGetCsvResponseNotices";
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
@@ -19,7 +20,7 @@ import { reducerGetCsvResponse, } from "@client/redux/state/airbrake/actionGetCs
 const initialState: State = {
 	projectId: defaultProjectId,
 	userKey: defaultUserKey,
-	getCsvLoading: { isLoading: false, total: 0, current: 0, },
+	getCsvIsLoading: false,
 	getCsvResponse: null,
 };
 
@@ -32,8 +33,9 @@ const reducer: Redux.Reducer<State> = (state: State | undefined, action: Redux.A
 	if (state === undefined) { state = Object.assign({}, initialState); }
 	state = reducerProjectId(state, action);
 	state = reducerUserKey(state, action);
-	state = reducerGetCsvLoading(state, action);
-	state = reducerGetCsvResponse(state, action);
+	state = reducerGetCsvIsLoading(state, action);
+	state = reducerGetCsvResponseGroups(state, action);
+	state = reducerGetCsvResponseNotices(state, action);
 	return state;
 };
 

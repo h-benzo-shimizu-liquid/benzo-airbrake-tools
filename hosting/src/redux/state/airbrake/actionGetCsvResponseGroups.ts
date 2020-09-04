@@ -12,16 +12,16 @@ import { State, StateGetCsvResponse, } from "@client/redux/state/airbrake/State"
 // ----------------------------------------------------------------
 
 // 命令構造体
-interface ActionGetCsvResponse extends Redux.Action<ActionTypes> {
-	value: StateGetCsvResponse | null;
+interface ActionGetCsvResponseGroups extends Redux.Action<ActionTypes> {
+	value: StateGetCsvResponse;
 }
 
 // ----------------------------------------------------------------
 
 // 命令作成
-function createActionGetCsvResponse(value: StateGetCsvResponse | null): ActionGetCsvResponse {
+function createActionGetCsvResponseGroups(value: StateGetCsvResponse): ActionGetCsvResponseGroups {
 	return {
-		type: ActionTypes.stateAirbrakeGetCsvResponse,
+		type: ActionTypes.stateAirbrakeGetCsvResponseGroups,
 		value,
 	};
 }
@@ -29,11 +29,11 @@ function createActionGetCsvResponse(value: StateGetCsvResponse | null): ActionGe
 // ----------------------------------------------------------------
 
 // 命令処理
-export function reducerGetCsvResponse(state: State, action: Redux.Action<ActionTypes>): State {
-	if (action.type !== ActionTypes.stateAirbrakeGetCsvResponse) { return state; }
-	const myAction: ActionGetCsvResponse = action as ActionGetCsvResponse;
+export function reducerGetCsvResponseGroups(state: State, action: Redux.Action<ActionTypes>): State {
+	if (action.type !== ActionTypes.stateAirbrakeGetCsvResponseGroups) { return state; }
+	const myAction: ActionGetCsvResponseGroups = action as ActionGetCsvResponseGroups;
 	const newState: State = Object.assign({}, state);
-	newState.getCsvResponse = myAction.value;
+	newState.getCsvResponse = Object.assign({}, myAction.value);
 	return newState;
 };
 
@@ -41,7 +41,7 @@ export function reducerGetCsvResponse(state: State, action: Redux.Action<ActionT
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 
-export const stateAirbrakeCreateActionGetCsvResponse = createActionGetCsvResponse;
+export const stateAirbrakeCreateActionGetCsvResponseGroups = createActionGetCsvResponseGroups;
 
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

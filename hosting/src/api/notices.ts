@@ -15,7 +15,7 @@ export interface Notice {
 	id: string;
 	groupId: string;
 	createdAt: string;
-	params: { info: string; };
+	params: { info: string; } | null;
 	errors: { message: string; }[];
 	context: {
 		messagePattern: string;
