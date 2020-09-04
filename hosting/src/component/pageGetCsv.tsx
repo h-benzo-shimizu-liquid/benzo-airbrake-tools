@@ -46,25 +46,28 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 			{storeIsLoading || storeResponse === null ? (
 				<div>loading</div>
 			) : Object.keys(storeResponse).map((key: string): JSX.Element => (
-				<div key={key}>
+				<div key={key} style={{
+					padding: "20px",
+					backgroundColor: storeResponse[key].loadingCount > 0 ? "#dddddd" : storeResponse[key].list === null ? "#eeeeee" : "#ffffff",
+				}}>
 					<div style={{
 						display: "flex",
 						flexDirection: "row",
 						justifyContent: "flex-start",
 						alignItems: "center",
-						minWidth: "1200px"
+						minWidth: "1200px",
 					}}>
-						<button style={{ width: "60px", }} onClick={(): void => {
+						<button style={{ width: "65px", }} onClick={(): void => {
 							setLocalFlagsShow(Object.assign({}, localFlagsShow, { [key]: !localFlagsShow[key], }));
-						}}>{localFlagsShow[key] ? "hide" : "show"}</button>
+						}}>{localFlagsShow[key] ? "▲ hide" : "▼ show"}</button>
 						{storeResponse[key].loadingCount > 0 ? (
-							<div style={{ marginLeft: "20px", }}>loading {storeResponse[key].loadingCount}</div>
+							<div style={{ width: "100px", marginLeft: "20px", }}>loading {storeResponse[key].loadingCount}</div>
 						) : storeResponse[key].list === null ? (
-							<button style={{ marginLeft: "20px", }} onClick={(): void => {
+							<button style={{ width: "100px", marginLeft: "20px", }} onClick={(): void => {
 								dispatch(middlewareAirbrakeCreateActionGetCsvNotices(key));
 							}}>get data</button>
 						) : (
-							<button style={{ marginLeft: "20px", }} onClick={(): void => {
+							<button style={{ width: "100px", marginLeft: "20px", }} onClick={(): void => {
 								const data: string = [[
 									"id",
 									"time",
@@ -90,7 +93,7 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 								anchor.click();
 							}}>download csv</button>
 						)}
-						<div style={{ marginLeft: "20px", width: "220px", }}>{storeResponse[key].value.id}</div>
+						<div style={{ marginLeft: "20px", width: "220px", }}><a href={`https://liquidinc.airbrake.io/projects/224929/groups/${storeResponse[key].value.id}`}>{storeResponse[key].value.id}</a></div>
 						<div style={{ marginLeft: "20px", width: "70px", }}>{storeResponse[key].value.noticeCount}</div>
 						<div style={{ marginLeft: "20px", width: "70px", }}>{((value: number | undefined): string => value !== undefined ? `${value}` : "???")(storeResponse[key].list?.length)}</div>
 						<div style={{ marginLeft: "20px", width: "400px", }}>{storeResponse[key].value.errors[0].message}</div>
@@ -138,17 +141,13 @@ const Component: React.FunctionComponent<{}> = ({}): JSX.Element => {
 									textOverflow: "ellipsis",
 									whiteSpace: "nowrap",
 								}}>
-									{param.value}
+									{index > 0 ? param.value : (<a href={`https://liquidinc.airbrake.io/projects/224929/groups/${key}/notices/${param.value}?tab=notice-detail`}>{param.value}</a>)}
 								</div>
 							</td>
 						))}</tr>
 					))}</tbody></table>)}
 				</div>
-			)).reduce((accumulator: JSX.Element[], currentValue: JSX.Element, index: number): JSX.Element[] => {
-				if (index > 0) { accumulator.push(<hr key={`hr-${index}`}></hr>); }
-				accumulator.push(currentValue);
-				return accumulator;
-			}, [])}
+			))}
 			<hr></hr>
 			<Link to="/">top</Link>
 		</div>
