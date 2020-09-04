@@ -49,11 +49,13 @@ export default async (request: RequestNotices): Promise<ResponseNotices> => {
 	const time: string = (!isForceGet && indexedData?.time) || new Date().toISOString();
 	const value: string = (!isForceGet && indexedData?.value) || await (async (): Promise<string> => {
 		// ローカルにデータを保持していなければサーバから取得
-		const value: string = await window.fetch(`${config.baseUrl}/notices`, {
+		const response: Response = await window.fetch(`${config.baseUrl}/notices`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json", },
 			body: JSON.stringify(request),
-		}).then((response: Response): Promise<string> => response.text());
+		});
+		if (response.status >= 400) { throw new Error(); }
+		const value: string = await response.text();
 		// サーバから受け取ったデータをローカルに保持
 		await putIndexedData({ id: keyValue, time, value, });
 

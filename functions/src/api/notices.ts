@@ -33,6 +33,7 @@ export default async (req: express.Request, res: express.Response, next: express
 			req.on("error", reject);
 			req.end();
 		}).then((res: IncomingMessage): Promise<string> => new Promise((resolve: (data: string) => void): void => {
+			if (res.statusCode === undefined || res.statusCode >= 400) { throw Error(); }
 			let list: string[] = [];
 			res.on("data", chunk => list.push(chunk));
 			res.on("end", () => resolve(list.join("")));
